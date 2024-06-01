@@ -10,10 +10,13 @@
     <string name="emailHint">Your email address…</string>
     <string name="passwordHint">Your password…</string>
     <string name="btn_sing_in">SIGN IN</string>
-    <string name="about">Developed by JuDaOcVa \n 2024</string>
+    <string name="about">Developed by @JuDaOcVa \n 2024</string>
     <string name="incorrect_creedentials_msj">Incorrect Credentials</string>
     <string name="email_required_msj">Email is required</string>
     <string name="password_required_msj">Password is required</string>
     <string name="createAppKey_endpoint">createAppkey</string>
+    <string name="createOauthkey_endpoint">createOauthkey</string>
+    <string name="createSesskey_endpoint">createSesskey</string>
+    <string name="logout">Logout</string>
 
 </resources>

@@ -1,6 +1,9 @@
 package com.judaocva.books.Login;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +11,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.judaocva.books.Login.Dto.LoginDto;
+import com.judaocva.books.Main.MainActivity;
 import com.judaocva.books.Miscellaneous.GeneralMethods;
 import com.judaocva.books.R;
 
@@ -38,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                     password_edt.requestFocus();
                 } else {
                     LoginDto user = new LoginDto(email, password);
-                    controller = new LoginController(LoginActivity.this);
+                    controller = new LoginController(LoginActivity.this, user);
                     CompletableFuture<Boolean> future = controller.validateCredentials();
                     future.whenComplete((isValid, ex) -> {
                         if (ex != null) {
@@ -48,8 +52,10 @@ public class LoginActivity extends AppCompatActivity {
                             // Handle invalid credentials
                             GeneralMethods.showAlert("Error", getString(R.string.incorrect_creedentials_msj), LoginActivity.this);
                         } else {
-                            System.out.println("Credentials are valid");
+                            Log.i("INFO", "Credentials are valid");
                             // Navigate to main activity
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
                         }
                     });
 

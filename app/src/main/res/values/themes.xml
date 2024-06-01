@@ -11,7 +11,12 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MyMenuTextAppearance" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/black</item> <!-- Cambia esto al color que desees -->
     </style>
 
 </resources>
