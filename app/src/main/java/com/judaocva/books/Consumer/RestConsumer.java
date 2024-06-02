@@ -5,14 +5,19 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.JsonObject;
 import com.judaocva.books.Consumer.Callbacks.CreateAppKeyCallback;
 import com.judaocva.books.Consumer.Callbacks.CreateOAuthKeyCallback;
 import com.judaocva.books.Consumer.Callbacks.CreateSessKeyCallback;
+import com.judaocva.books.Consumer.Callbacks.GetAllBooksCallback;
 import com.judaocva.books.Login.Dto.CreateAppKeyResponse;
 import com.judaocva.books.Login.Dto.CreateOAuthKeyResponse;
 import com.judaocva.books.Login.Dto.CreateSessKeyResponse;
 import com.judaocva.books.Login.Service.ApiServiceLogin;
+import com.judaocva.books.Main.Service.ApiServiceMain;
 import com.judaocva.books.Miscellaneous.GeneralMethods;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -129,6 +134,41 @@ public class RestConsumer {
                 // Dismiss loading dialog
                 Log.e("RestConsumer createSessKey", "Error: " + t.getMessage());
                 callback.onError(t);
+                GeneralMethods.dismissLoadingDialog();
+            }
+        });
+    }
+
+    public static void getAllBooks(String version, String req, String u_c, String o_u, String sesskey, Context context, GetAllBooksCallback callback) {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        ApiServiceMain apiService = retrofit.create(ApiServiceMain.class);
+        Call<JsonObject> call = apiService.getAllBooks(version, req, u_c, o_u, sesskey);
+
+        // Show loading dialog
+        GeneralMethods.showLoadingDialog(context);
+
+        // async call to the API endpoint to get all books user authenticated
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                // Dismiss loading dialog
+                GeneralMethods.dismissLoadingDialog();
+
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                Log.e("RestConsumer getAllBooks", "Error: " + t.getMessage());
+                callback.onError(t);
+                // Dismiss loading dialog
                 GeneralMethods.dismissLoadingDialog();
             }
         });

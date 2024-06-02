@@ -17,6 +17,9 @@
     <string name="createAppKey_endpoint">createAppkey</string>
     <string name="createOauthkey_endpoint">createOauthkey</string>
     <string name="createSesskey_endpoint">createSesskey</string>
+    <string name="getAllBooks_endpoint">getAllBooks</string>
+    <string name="timetonic_url">https://timetonic.com/</string>
     <string name="logout">Logout</string>
+    <string name="book_image">Book Image</string>
 
 </resources>

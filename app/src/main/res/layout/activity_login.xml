@@ -65,7 +65,8 @@
                 android:hint="@string/emailHint"
                 android:inputType="textEmailAddress"
                 android:padding="@dimen/_10sdp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,7 +96,8 @@
                 android:hint="@string/passwordHint"
                 android:inputType="textPassword"
                 android:padding="@dimen/_10sdp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray" />
         </LinearLayout>
 
         <LinearLayout

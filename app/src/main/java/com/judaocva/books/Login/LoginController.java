@@ -36,12 +36,13 @@ public class LoginController {
                         if (ex2 != null) {
                             future.completeExceptionally(ex2);
                         } else {
+                            SharedPreferences sharedPreferences = context.getSharedPreferences("session_data", Context.MODE_PRIVATE);
                             createSessKeyResponse(responseCreateOAuthKey.getO_u(), responseCreateOAuthKey.getO_u(), responseCreateOAuthKey.getOauthkey()).whenComplete((responseCreateSessKey, ex3) -> {
+                                sharedPreferences.edit().putString("o_u", responseCreateOAuthKey.getO_u()).apply();
                                 if (ex3 != null) {
                                     future.completeExceptionally(ex3);
                                 } else {
                                     if (responseCreateSessKey != null) {
-                                        SharedPreferences sharedPreferences = context.getSharedPreferences("session_data", Context.MODE_PRIVATE);
                                         sharedPreferences.edit().putString("sesskey", responseCreateSessKey.getSesskey()).apply();
                                         future.complete(responseCreateSessKey.getStatus().equals("ok"));
                                     }
